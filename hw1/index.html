@@ -7,72 +7,75 @@
     </head>
     <body>
         <script>
+            
+//             Не успела доделать, к следующему ДЗ обязательно сделаю
+            
             function chessGeneration() {
 
                 var letters = ["A", "B", "C", "D", "E", "F", "G", "H"];
                 var count = 7;
 
-                var div1 = document.createElement('div');
-                div1.className = "div_0";
-                document.body.appendChild(div1);
+//                 var div1 = document.createElement('div');
+//                 div1.className = "div_0";
+//                 document.body.appendChild(div1);
 
-                var div_top = document.createElement('div');
-                div_top.className = "div_top";
-                for (i = 0; i <= 7; i++) {
-                    var div_top_p = document.createElement('div');
-                    div_top_p.className = "div_top_p";
-                    div_top_p.innerHTML = letters[i];
-                    div_top.appendChild(div_top_p);
-                }
-                document.body.appendChild(div_top);
+//                 var div_top = document.createElement('div');
+//                 div_top.className = "div_top";
+//                 for (i = 0; i <= 7; i++) {
+//                     var div_top_p = document.createElement('div');
+//                     div_top_p.className = "div_top_p";
+//                     div_top_p.innerHTML = letters[i];
+//                     div_top.appendChild(div_top_p);
+//                 }
+//                 document.body.appendChild(div_top);
 
-                var div_r = document.createElement('div');
-                document.body.appendChild(div_r);
+//                 var div_r = document.createElement('div');
+//                 document.body.appendChild(div_r);
 
-                var div_left = document.createElement('div');
-                div_left.className = "div_left";
-                for (i = 1; i <= 8; i++) {
-                    var div_left_p = document.createElement('div');
-                    div_left_p.className = "div_left_p";
-                    div_left_p.innerHTML = i;
-                    div_left.appendChild(div_left_p);
-                }
-                document.body.appendChild(div_left);
+//                 var div_left = document.createElement('div');
+//                 div_left.className = "div_left";
+//                 for (i = 1; i <= 8; i++) {
+//                     var div_left_p = document.createElement('div');
+//                     div_left_p.className = "div_left_p";
+//                     div_left_p.innerHTML = i;
+//                     div_left.appendChild(div_left_p);
+//                 }
+//                 document.body.appendChild(div_left);
 
-                var div_game = document.createElement('div');
-                div_game.className = "div_game";
-                document.body.appendChild(div_game);
+//                 var div_game = document.createElement('div');
+//                 div_game.className = "div_game";
+//                 document.body.appendChild(div_game);
 
-                function board() {
-                    var iDiv = document.createElement('div');
-                    div_game.appendChild(iDiv);
-                }
-                function white(text) {
-                    var iDivWhite = document.createElement('div');
-                    iDivWhite.className = "white";
-                    iDivWhite.innerHTML = text;
-                    div_game.appendChild(iDivWhite);
-                }
-                function black(text) {
-                    var iDivBlack = document.createElement('div');
-                    iDivBlack.className = "black";
-                    iDivBlack.innerHTML = text;
-                    div_game.appendChild(iDivBlack);
-                }
+//                 function board() {
+//                     var iDiv = document.createElement('div');
+//                     div_game.appendChild(iDiv);
+//                 }
+//                 function white(text) {
+//                     var iDivWhite = document.createElement('div');
+//                     iDivWhite.className = "white";
+//                     iDivWhite.innerHTML = text;
+//                     div_game.appendChild(iDivWhite);
+//                 }
+//                 function black(text) {
+//                     var iDivBlack = document.createElement('div');
+//                     iDivBlack.className = "black";
+//                     iDivBlack.innerHTML = text;
+//                     div_game.appendChild(iDivBlack);
+//                 }
 
-                for (var j = 0; j <= count; j++) {
-                    for (var i = 0; i <= count; i++) {
-                        if (j % 2 == 0 && i % 2 == 00 || j % 2 != 0 && i % 2 != 0) {
-                            white(letters[j] + '' + i);
-                        } else {
-                            black(letters[j] + '' + i);
-                        }
-                    }
-                    board();
-                }
+//                 for (var j = 0; j <= count; j++) {
+//                     for (var i = 0; i <= count; i++) {
+//                         if (j % 2 == 0 && i % 2 == 00 || j % 2 != 0 && i % 2 != 0) {
+//                             white(letters[j] + '' + i);
+//                         } else {
+//                             black(letters[j] + '' + i);
+//                         }
+//                     }
+//                     board();
+//                 }
             };
             
-            chessGeneration();
+            ChessGeneration();
 
         </script>
 
