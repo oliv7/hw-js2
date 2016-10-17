@@ -1,81 +1,94 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>hw1</title>
+        <title>HW-1</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style> 
+            .game{ 
+                border: 1px solid #000; 
+            } 
+            .white, .black{ 
+                width: 50px;
+                height: 50px;
+                padding: 0px;
+                margin: 0px;
+                font-size: 18px;
+                text-align: center;
+                line-height: 50px;
+                cursor: pointer;
+                color: #717171;
+                display: inline-block;
+            } 
+            .bukv{ 
+                height: 20px; 
+                width: 50px; 
+                padding: 0px; 
+                margin: 0px; 
+                font-size: 18px; 
+                text-align: center; 
+                line-height: 20px; 
+                display: inline-block; 
+            } 
+            .white{ 
+                background: #fff; 
+            } 
+            .black{ 
+                background: silver; 
+            } 
+
+
+        </style> 
     </head>
     <body>
+
         <script>
-            
-//             Не успела доделать, к следующему ДЗ обязательно сделаю
-            
-            function chessGeneration() {
+            // создаем div с классом game который добавляется в body
+            var game = document.createElement('div');
+            game.className = "game";
+            document.body.appendChild(game);
 
-                var letters = ["A", "B", "C", "D", "E", "F", "G", "H"];
-                var count = 7;
-
-//                 var div1 = document.createElement('div');
-//                 div1.className = "div_0";
-//                 document.body.appendChild(div1);
-
-//                 var div_top = document.createElement('div');
-//                 div_top.className = "div_top";
-//                 for (i = 0; i <= 7; i++) {
-//                     var div_top_p = document.createElement('div');
-//                     div_top_p.className = "div_top_p";
-//                     div_top_p.innerHTML = letters[i];
-//                     div_top.appendChild(div_top_p);
-//                 }
-//                 document.body.appendChild(div_top);
-
-//                 var div_r = document.createElement('div');
-//                 document.body.appendChild(div_r);
-
-//                 var div_left = document.createElement('div');
-//                 div_left.className = "div_left";
-//                 for (i = 1; i <= 8; i++) {
-//                     var div_left_p = document.createElement('div');
-//                     div_left_p.className = "div_left_p";
-//                     div_left_p.innerHTML = i;
-//                     div_left.appendChild(div_left_p);
-//                 }
-//                 document.body.appendChild(div_left);
-
-//                 var div_game = document.createElement('div');
-//                 div_game.className = "div_game";
-//                 document.body.appendChild(div_game);
-
-//                 function board() {
-//                     var iDiv = document.createElement('div');
-//                     div_game.appendChild(iDiv);
-//                 }
-//                 function white(text) {
-//                     var iDivWhite = document.createElement('div');
-//                     iDivWhite.className = "white";
-//                     iDivWhite.innerHTML = text;
-//                     div_game.appendChild(iDivWhite);
-//                 }
-//                 function black(text) {
-//                     var iDivBlack = document.createElement('div');
-//                     iDivBlack.className = "black";
-//                     iDivBlack.innerHTML = text;
-//                     div_game.appendChild(iDivBlack);
-//                 }
-
-//                 for (var j = 0; j <= count; j++) {
-//                     for (var i = 0; i <= count; i++) {
-//                         if (j % 2 == 0 && i % 2 == 00 || j % 2 != 0 && i % 2 != 0) {
-//                             white(letters[j] + '' + i);
-//                         } else {
-//                             black(letters[j] + '' + i);
-//                         }
-//                     }
-//                     board();
-//                 }
+            function Chess(game) {
+                // выделение ячейки при клике
+                var listener = function (event) {
+                    event.target.style.outline = "2px solid black";
+                    event.target.style['outline-offset'] = "-2px";
+                    setTimeout(function () {
+                        event.target.style.outline = "2px solid transparent";
+                    }, 3000);
+                };
+                // создание ячейки
+                var squares = function (game, color, id) {
+                    var iDivSquares = document.createElement('div');
+                    iDivSquares.setAttribute("id", id);
+                    iDivSquares.className = color;
+                    iDivSquares.innerHTML = id;
+                    iDivSquares.addEventListener("click", listener);
+                    game.appendChild(iDivSquares);
+                };
+                // div который разделяет строки
+                var board = function (game) {
+                    var iDiv = document.createElement('div');
+                    game.appendChild(iDiv);
+                };
+                // рисуем доску
+                this.generatBoard = function (x, y) {
+                    game.style.width = x * 50 + "px"; // вычисляем длину строки и передаем ее классу game
+                    game.style.height = y * 50 + "px"; // длину стобца
+                    for (var i = 1; i <= y; i++) {
+                        for (var j = 1; j <= x; j++) {
+                            var color = ((i + j) % 2 == 0) ? "white" : "black"; // сумма двух нечетных и двух четных чисел равно четному числу
+                            var id = String.fromCharCode(i + 64) + (j); // назначем id символ латинского алфавита + номер столбца
+                            squares(game, color, id); // создаем ячейку с назначенными параметрами
+                        }
+                        board(game); // разделитель строк
+                    }
+                };
             };
             
-            ChessGeneration();
+            var ClassChess = new Chess(game);
+
+            ClassChess.generatBoard(prompt('Введите х', 8), prompt('Введите y', 8));
 
         </script>
 
