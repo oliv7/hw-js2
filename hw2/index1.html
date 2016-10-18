@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HW-2 #1</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+        <!--и первое задание выполнила, посмотрите его пжл-->
+        
+        <div id="data2"></div>
+        <button id="btn">Получить данные в виде списка</button>
+        <button id="btn_del">Удалить данные</button>
+        <script>
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState != 4)
+                    return;
+                if (xhr.status == 200) {
+                    var person = JSON.parse(xhr.responseText);
+
+                    var date = document.getElementById("data2");
+
+                    console.log(person);
+
+                    for (var i = 0; i < person.telephones.length; i++) {
+                        var phone = person.telephones[i];
+                        var iDiv = document.createElement('div');
+                        iDiv.innerHTML = phone;
+                        date.appendChild(iDiv);
+                    }
+                } else {
+                    console.log('Error', xhr.status, xhr.statusText);
+                }
+            };
+            
+            var btn2 = document.getElementById('btn');
+            console.log(btn2);
+            btn2.addEventListener("click", function () {
+                xhr.open('GET', 'phones.json', true);
+                xhr.send();
+            });
+            
+            var dateDel = document.getElementById("btn_del");
+            dateDel.addEventListener("click", function () {
+                var date = document.getElementById("data2");
+                date.innerHTML = '';
+            });
+
+        </script>
+
+
+
+    </body>
+</html>
