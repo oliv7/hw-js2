@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HW-2 #2</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style> 
+            .game{ 
+                border: 1px solid #000; 
+            } 
+            .white, .black{ 
+                width: 50px;
+                height: 50px;
+                padding: 0px;
+                margin: 0px;
+                font-size: 40px;
+                text-align: center;
+                line-height: 50px;
+                cursor: pointer;
+                color: #717171;
+                float: left;
+                display: inline-block;
+            } 
+            .bukv{ 
+                height: 20px; 
+                width: 50px; 
+                padding: 0px; 
+                margin: 0px; 
+                font-size: 18px; 
+                text-align: center; 
+                line-height: 20px; 
+                display: inline-block; 
+            } 
+            .white{ 
+                background: #fff; 
+            } 
+            .black{ 
+                background: silver; 
+            } 
+        </style> 
+    </head>
+    <body>
+
+        <script>
+            // создаем div с классом game который добавляется в body
+            var game = document.createElement('div');
+            game.className = "game";
+            document.body.appendChild(game);
+            function Chess(game) {
+                // выделение ячейки при клике
+                var listener = function (event) {
+                    event.target.style.outline = "2px solid black";
+                    event.target.style['outline-offset'] = "-2px";
+                    setTimeout(function () {
+                        event.target.style.outline = "2px solid transparent";
+                    }, 3000);
+                };
+                // создание ячейки
+                var squares = function (game, color, id) {
+                    var iDivSquares = document.createElement('div');
+                    iDivSquares.setAttribute("id", id);
+                    iDivSquares.className = color;
+                    iDivSquares.innerHTML = id;
+                    iDivSquares.addEventListener("click", listener);
+                    game.appendChild(iDivSquares);
+                };
+                // div который разделяет строки
+                var board = function (game) {
+                    var iDiv = document.createElement('div');
+                    game.appendChild(iDiv);
+                };
+                // рисуем доску
+                this.generatBoard = function (x, y) {
+                    game.style.width = x * 50 + "px"; // вычисляем длину строки и передаем ее классу game
+                    game.style.height = y * 50 + "px"; // длину стобца
+                    for (var i = 1; i <= y; i++) {
+                        for (var j = 1; j <= x; j++) {
+                            var color = ((i + j) % 2 == 0) ? "white" : "black"; // сумма двух нечетных и двух четных чисел равно четному числу
+                            var id = String.fromCharCode(i + 64) + (j); // назначем id символ латинского алфавита + номер столбца
+                            squares(game, color, id); // создаем ячейку с назначенными параметрами
+                        }
+                        board(game); // разделитель строк
+                    }
+                };
+                this.figures = function () {
+                    var array = game.querySelectorAll("div");
+                    for (var v = 0; v < array.length; v++) {
+                        var r = array[v];
+                        if ((r.textContent.charAt(0) == "B") || (r.textContent.charAt(0) == "G")) {
+                            if (r.textContent.charAt(0) == "B") {
+                                r.innerHTML = "&#9823;";
+                            }
+                            if (r.textContent.charAt(0) == "G") {
+                                r.innerHTML = "&#9817;";
+                            }
+                        }
+                        else if (r.textContent == "A1" || r.textContent == "A8") {
+                            r.innerHTML = "&#9820;";
+                        }
+                        else if (r.textContent == "A2" || r.textContent == "A7") {
+                            r.innerHTML = "&#9822;";
+                        }
+                        else if (r.textContent == "A3" || r.textContent == "A6") {
+                            r.innerHTML = "&#9821;";
+                        }
+                        else if (r.textContent == "A5") {
+                            r.innerHTML = "&#9818;";
+                        }
+                        else if (r.textContent == "A4") {
+                            r.innerHTML = "&#9819;";
+                        }
+                        else if (r.textContent == "H1" || r.textContent == "H8") {
+                            r.innerHTML = "&#9814;";
+                        }
+                        else if (r.textContent == "H2" || r.textContent == "H7") {
+                            r.innerHTML = "&#9816;";
+                        }
+                        else if (r.textContent == "H3" || r.textContent == "H6") {
+                            r.innerHTML = "&#9815;";
+                        }
+                        else if (r.textContent == "H5") {
+                            r.innerHTML = "&#9812;";
+                        }
+                        else if (r.textContent == "H4") {
+                            r.innerHTML = "&#9813;";
+                        }
+                        
+                        // если нужно вывести буквы закомментировать блок
+                        else {
+                            r.innerHTML = null;
+                        }
+                    }
+                };
+
+            };
+
+            var ClassChess = new Chess(game);
+            ClassChess.generatBoard(8, 8);
+            ClassChess.figures();
+
+        </script>
+
+    </body>
+</html>
