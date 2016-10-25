@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DZ4 1</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .clock{
+                width: 200px;
+                height: 60px;
+                background: rgb(69,72,77);
+                background: -moz-linear-gradient(top, rgba(69,72,77,1) 0%, rgba(0,0,0,1) 100%);
+                background: -webkit-linear-gradient(top, rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);
+                background: linear-gradient(to bottom, rgba(69,72,77,1) 0%,rgba(0,0,0,1) 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
+                margin: 20px auto;
+                border: 1px solid #000;
+                border-radius: 30px;
+                text-align: center;
+                -webkit-box-shadow: 4px -3px 3px 0px rgba(0, 0, 0, 0.45);
+                -moz-box-shadow: 4px -3px 3px 0px rgba(0, 0, 0, 0.45);
+                box-shadow: 4px -3px 3px 0px rgba(0, 0, 0, 0.45);
+                display: block;
+            }
+            .clock:before{
+                content: "";
+                width: 20px;
+                height: 5px;
+                margin: -6px 0 0 45px;
+                border-radius: 5px;
+                background: #3c3c45;
+                -webkit-box-shadow: 4px -3px 3px 0px rgba(0, 0, 0, 0.45);
+                -moz-box-shadow: 4px -3px 3px 0px rgba(0, 0, 0, 0.45);
+                box-shadow: 4px -3px 3px 0px rgba(0, 0, 0, 0.45);
+                position: relative;
+                display: block;
+            }
+            .h, .m, .s{
+                font-size: 40px;
+                line-height: 50px;
+                color: #fff;
+                padding: 4px;
+                font-family: sans-serif;
+                display: inline-block;
+            }
+            #start{
+                text-align: center;
+                display: block;
+                cursor: pointer;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <!--Clock-->
+        <div class="clock">
+            <div class="h"></div>
+            <div class="m"></div>
+            <div class="s"></div>
+        </div>
+        
+            <div id="start">Start</div>
+        
+        <script>
+            var f;
+            function Clock(a) {
+
+                this.elem_h = a.elem_h;
+                this.elem_m = a.elem_m;
+                this.elem_s = a.elem_s;
+                
+                function cl() {
+                    var date = new Date();
+                    var hour = date.getHours();
+                    hour = (hour < 10) ? '0' + hour : hour;
+                    var min = date.getMinutes();
+                    min = (min < 10) ? '0' + min : min;
+                    var sec = date.getSeconds();
+                    sec = (sec < 10) ? '0' + sec : sec;
+//                        var clock = new Clock();
+
+                    this.elem_h[0].innerHTML = hour;
+                    this.elem_m[0].innerHTML = min;
+                    this.elem_s[0].innerHTML = sec;
+
+                };
+
+                var inVal = false;
+                
+                this.start_stop = function () {
+                    if(! inVal) {
+                        var _this = a;
+                        inVal = setInterval(function() {
+                            cl.call(_this);
+                        }, 1000);
+                    } else {
+                        clearInterval(inVal);
+                        inVal = false;
+                    }
+                };
+            };
+            
+            var clock = new Clock({
+                elem_h: document.getElementsByClassName('h'),
+                elem_m: document.getElementsByClassName('m'),
+                elem_s: document.getElementsByClassName('s')
+            });
+            
+             // старт
+//            clock.stop(); // стоп
+//
+//            console.log(clock.elem_h);
+            var el = document.getElementById('start');
+            el.addEventListener('click', function() {
+                // старт
+                clock.start_stop();
+//                var el = document.getElementById('start');
+                if(el.innerHTML == 'Stop') {
+                    el.innerHTML = 'Start';
+                } else {
+                    el.innerHTML = 'Stop';
+                }
+                
+            }, true);
+
+        </script>
+
+
+
+
+
+    </body>
+</html>
